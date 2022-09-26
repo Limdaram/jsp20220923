@@ -15,6 +15,7 @@
 	password : <input type="password" name="p"> <br>
 	file : <input type="file" name="f"> <br>
 	button : <input type="button" value="button"> <br>
+	<br>
 	<input type="submit" value="전송">
 	</form>
 </body>

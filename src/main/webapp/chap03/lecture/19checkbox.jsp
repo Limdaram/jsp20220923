@@ -13,7 +13,7 @@
 	<input type="checkbox" name="coffee" value="americano"> 아메리카노
 	<input type="checkbox" name="coffee" value="latte"> 라떼
 	<input type="checkbox" name="coffee" value="valilalatte"> 바닐라라떼
-	<input type="checkbox" name="coffee" value="dolchelatte"> 돌체라떼
+	<input type="checkbox" name="coffee" value="dolcelatte"> 돌체라떼
 	<input type="checkbox" name="coffee" value="mocalatte"> 모카라떼
 	<br>
 	<input type="submit" value="전송">

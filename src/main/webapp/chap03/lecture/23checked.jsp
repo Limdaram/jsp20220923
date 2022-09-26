@@ -11,7 +11,6 @@
 	<%-- radio버튼, checkbox 요소에 checked 속성이 있으면 로딩시 선택된 상태 --%>
 	<form action="">
 	<input type="checkbox" name="food" value="pizza" checked>
-	<input type="checkbox" name="food" value="bibimbab">
 	<input type="checkbox" name="food" value="kimchi">
 	<input type="checkbox" name="food" value="burger">
 	<hr>
