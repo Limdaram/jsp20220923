@@ -8,19 +8,18 @@ public class Person {
 	private Integer age;
 	private boolean alive;
 	
-	public boolean isAlive() { // boolean type 읽기 프로퍼티의 메소드는 is로 시작
-		return alive;
+	public Person() {
+		
 	}
-
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-
-	public Person(String name, Integer age) {
+	
+	public Person(String name, Integer age, boolean alive) {
 		super();
 		this.name = name;
 		this.age = age;
+		this.alive = alive;
 	}
+	
+
 
 	public String getName() {
 		return name;
@@ -37,6 +36,13 @@ public class Person {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
 	
 }
