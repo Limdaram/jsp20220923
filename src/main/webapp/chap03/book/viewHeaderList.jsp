@@ -24,7 +24,7 @@
 	<hr />
 	
 	<%
-	Iterator headerEnum = request.getHeaderNames().asIterator();
+	Iterator heaIterator = request.getHeaderNames().asIterator();
 	while (headerEnum.hasNext()) {
 		String headerName = (String)headerEnum.next();
 		String headerValue = request.getHeader(headerName);
