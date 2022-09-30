@@ -4,6 +4,10 @@ public class Book {
 	private String title;
 	private Integer price;
 	
+	public Book () {
+		
+	}
+	
 	public Book(String title, Integer price) {
 		super();
 		this.title = title;
