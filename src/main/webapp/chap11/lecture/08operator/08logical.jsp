@@ -37,9 +37,9 @@
 	<hr>
 	
 	<h4>!, not</h4>
-	<p>${! ture }</p>
+	<p>${! true }</p>
 	<p>${! false }</p>
-	<p>${not ture }</p>
+	<p>${not true }</p>
 	<p>${not false }</p>
 </body>
 </html>
