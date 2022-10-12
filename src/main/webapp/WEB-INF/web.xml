@@ -87,7 +87,7 @@
   	<filter-name>filter 05</filter-name>
   	<!-- <url-pattern>/Servlet10</url-pattern> -->
   	<!-- <url-pattern>/Servlet11</url-pattern> -->
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>/Servlet11</url-pattern>
   </filter-mapping>
   
   <!-- 서블릿 설정(6번) -->
