@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Servlet12
+ * Servlet implementation class Servlet13
  */
-@WebServlet("/Servlet12")
-public class Servlet12 extends HttpServlet {
+@WebServlet("/Servlet13")
+public class Servlet13 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet12() {
+    public Servlet13() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,73 +32,40 @@ public class Servlet12 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String sql = "SELECT firstName FROM Employees WHERE EmployeeID = 1";
 		
-		String sql = "SELECT CustomerName "
-				+ "FROM Customers "
-				+ "WHERE CustomerID <= 2 "
-				+ "ORDER BY CustomerName ";
+		// class loading
 		
-		// 1. JDBC 드라이버 로딩
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+		// connection 얻기
 		ServletContext application = request.getServletContext();
-		
 		String url = application.getAttribute("jdbc.url").toString();
 		String user = application.getAttribute("jdbc.username").toString();
 		String password = application.getAttribute("jdbc.password").toString();
 		
-		try (	
-				// 2. 데이터베이스 커넥션 구하기
+		try (
 				Connection con = DriverManager.getConnection(url, user, password);
-				// 3. 쿼리 실행을 위한 statement 객체 생성
+				
+				// statment 생성
 				Statement stmt = con.createStatement();
-				// 4. 쿼리 실행
+				// 쿼리 실행
 				ResultSet rs = stmt.executeQuery(sql);
 				
 				) {
-
-				// 5. 쿼리 실행 결과 사용 (가공)
-				// ResultSet 사용
-				System.out.println("문제없이 연결됨");
+			// 쿼리 결과 가공 (레코드 결과가 하나라서 if문 사용)
+			if (rs.next()) {
+				String firstName = rs.getString(1);
+				System.out.println(firstName);
 				
-				/*
-				System.out.println(rs.next()); // true
-				String name1 = rs.getString(1);
-				System.out.println(name1);
+				request.setAttribute("firstName", firstName);
+				
 			
-				
-				System.out.println(rs.next()); // true
-				String name2 = rs.getString(2);
-				
-				System.out.println(rs.next()); // false
-				*/
-			
-			while(rs.next()) {
-				String name = rs.getString(1);
-				System.out.println(name);
-				
 			}
-				
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("문제가 발생됨");
 		}
 		
-		
-		
-		
-		// 6. 자원(statement, connection) 닫기
-		// try-with-resoures 문법으로 생략
-//		stmt.close();
-//		con.close();
-		
-		// +. checked exception 처리
-		
-		
+		String path = "/WEB-INF/view/chap14/view01.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**
