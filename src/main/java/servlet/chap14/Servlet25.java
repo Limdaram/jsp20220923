@@ -3,10 +3,7 @@ package servlet.chap14;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Statement;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,19 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.chap14.Customer;
-
 /**
- * Servlet implementation class Servlet23
+ * Servlet implementation class Servlet25
  */
-@WebServlet("/Servlet23")
-public class Servlet23 extends HttpServlet {
+@WebServlet("/Servlet25")
+public class Servlet25 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Servlet23() {
+    public Servlet25() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +30,13 @@ public class Servlet23 extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-// 1. 파라미터 수집 / 가공
-String keyword = request.getParameter("keyword");
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	String sql = "INSERT INTO Employees "
+		+ "(LastName, FirstName, BirthDate, Photo, Notes) "
+		+ "VALUES ('Lim', 'Chaeeun', '1997-08-21', 'EmpIDAA.pic', 'Person') ";
 
-if (keyword == null) {
-	keyword = "";
-}
-
-keyword = "%" + keyword + "%";
-
-String sql = "SELECT CustomerID, CustomerName, Address, City, Country "
-		+ "FROM Customers "
-		+ "WHERE CustomerName LIKE ?";
-
+// connection 얻기
+// statement 얻기
 ServletContext application = request.getServletContext();
 
 String url = application.getAttribute("jdbc.url").toString();
@@ -57,33 +45,17 @@ String pw = application.getAttribute("jdbc.password").toString();
 
 try (
 		Connection con = DriverManager.getConnection(url, user, pw);
-		PreparedStatement pstmt = con.prepareStatement(sql);) {
+		Statement stmt = con.createStatement();
+		) {
 	
-	pstmt.setString(1, keyword);
-	
-	try (ResultSet rs = pstmt.executeQuery()) {
+		int cnt = stmt.executeUpdate(sql);
 		
-		List<Customer> list = new ArrayList<>();
-		while (rs.next()) {
-			Customer c = new Customer();
-			c.setName(rs.getString("customerName"));
-			c.setAddress(rs.getString("address"));
-			c.setId(rs.getInt("customerId"));
-			c.setCity(rs.getString("city"));
-			c.setCountry(rs.getString("country"));
-			
-			list.add(c);
-		}
-		
-		request.setAttribute("customers", list);
-	}
-	
+		System.out.println(cnt);
 } catch (Exception e) {
 	e.printStackTrace();
 }
-
-String path = "/WEB-INF/view/chap14/view07.jsp";
-request.getRequestDispatcher(path).forward(request, response);
+// 쿼리 실행
+		
 	}
 
 	/**

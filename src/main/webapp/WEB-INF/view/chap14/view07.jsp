@@ -11,6 +11,7 @@
 </head>
 <body>
 	<h1>고객 목록</h1>
+	<a href="${pageContext.request.contextPath }/Servlet28">새 고객 등록하러 가기</a>
 	
 	<form action="">
 		<input type="text" name="keyword" value="${param.keyword }">
