@@ -82,7 +82,8 @@ public class Servlet30 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		
 		String customerName = request.getParameter("customerName");
 		String contactName = request.getParameter("contactName");
 		String address = request.getParameter("address");
@@ -120,22 +121,19 @@ public class Servlet30 extends HttpServlet {
 			if (cnt == 1) {
 				// 4. add attribute
 				HttpSession session = request.getSession();
-				session.setAttribute("message", "직원 정보가 수정되었습니다.");
+				session.setAttribute("message", id + "번 직원 정보가 수정되었습니다.");
 				
-				/*
-				 * URL o = new URL ("http://localhost:8080/jsp20220923/Servlet23");
-				 * HttpURLConnection conn = (HttpURLConnection)o.openConnection();
-				 * conn.setRequestMethod("GET");
-				 */
 			}
 			// 5. forward / redirect
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 String path = "/jsp20220923/Servlet23";
-//		 request.getRequestDispatcher(path).forward(request, response);
-		 response.sendRedirect(path);
+		
+		// 수정 후 수정정보 반영하여 목록보기 (url : Servlet23) 
+		String path = "/jsp20220923/Servlet23";
+		response.sendRedirect(path);
+		 
 		
 	}
 

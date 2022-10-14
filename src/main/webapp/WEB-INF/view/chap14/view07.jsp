@@ -11,6 +11,15 @@
 </head>
 <body>
 	<h1>고객 목록</h1>
+	<c:if test="${not empty sessionScope.message }">
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong>${sessionScope.message }</strong> 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	</c:if>
+	<div>
+		<c:remove var="message" scope="session"/>
+	</div>
 	<a href="${pageContext.request.contextPath }/Servlet28">새 고객 등록하러 가기</a>
 	
 	<form action="">
@@ -21,6 +30,7 @@
 		<input type="text" name="id">
 		<input type="submit" value="수정하기">
 	</form>
+	
 	<table class="table">
 		<thead>
 			<tr>
@@ -36,7 +46,14 @@
 			<c:forEach items="${customers }" var="customer">
 				<tr>
 					<td>${customer.id }</td>
-					<td>${customer.name }</td>
+					<td>
+						<c:url value="/Servlet30" var="updateUrl">
+							<c:param name="id" value="${customer.id }" />
+						</c:url>
+						<a href="${updateUrl }" >
+							${customer.name }					
+						</a>
+					</td>
 					<td>${customer.cname }</td>
 					<td>${customer.address }</td>
 					<td>${customer.city }</td>
