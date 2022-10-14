@@ -45,7 +45,7 @@ if (keyword == null) {
 
 keyword = "%" + keyword + "%";
 
-String sql = "SELECT CustomerID, CustomerName, Address, City, Country "
+String sql = "SELECT CustomerID, CustomerName, ContactName, Address, City, Country "
 		+ "FROM Customers "
 		+ "WHERE CustomerName LIKE ?";
 
@@ -71,6 +71,7 @@ try (
 			c.setId(rs.getInt("customerId"));
 			c.setCity(rs.getString("city"));
 			c.setCountry(rs.getString("country"));
+			c.setCname(rs.getString("contactName"));
 			
 			list.add(c);
 		}

@@ -41,6 +41,7 @@ public class Servlet28 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String customerName = request.getParameter("name");
+		String contactName = request.getParameter("cname");
 		String address = request.getParameter("address");
 		String city = request.getParameter("city");
 		String conutry = request.getParameter("country");
@@ -49,8 +50,8 @@ public class Servlet28 extends HttpServlet {
 		
 		// 3. business logic (insert into)
 		String sql = "INSERT INTO Customers "
-				+ "(CustomerName, Address, City, Country) "
-				+ "VALUES (?, ?, ?, ?)";
+				+ "(CustomerName, ContactName, Address, City, Country) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		ServletContext application = request.getServletContext();
 		
@@ -64,9 +65,10 @@ public class Servlet28 extends HttpServlet {
 				) {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, customerName);
-				pstmt.setString(2, address);
-				pstmt.setString(3, city);
-				pstmt.setString(4, conutry);
+				pstmt.setString(2, contactName);
+				pstmt.setString(3, address);
+				pstmt.setString(4, city);
+				pstmt.setString(5, conutry);
 				
 				int cnt = pstmt.executeUpdate();
 				

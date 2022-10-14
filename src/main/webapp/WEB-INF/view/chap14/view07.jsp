@@ -17,11 +17,16 @@
 		<input type="text" name="keyword" value="${param.keyword }">
 		<input type="submit" value="이름검색">
 	</form>
+	<form action="${pageContext.request.contextPath }/Servlet30">
+		<input type="text" name="id">
+		<input type="submit" value="수정하기">
+	</form>
 	<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>이름</th>
+				<th>별칭</th>
 				<th>주소</th>
 				<th>도시</th>
 				<th>나라</th>
@@ -32,6 +37,7 @@
 				<tr>
 					<td>${customer.id }</td>
 					<td>${customer.name }</td>
+					<td>${customer.cname }</td>
 					<td>${customer.address }</td>
 					<td>${customer.city }</td>
 					<td>${customer.country }</td>

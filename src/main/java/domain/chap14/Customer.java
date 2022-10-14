@@ -6,10 +6,17 @@ public class Customer {
 	private Integer id;
 	private String country;
 	private String city;
+	private String cname;
 	
 	
 	
 	
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 	public String getCountry() {
 		return country;
 	}
